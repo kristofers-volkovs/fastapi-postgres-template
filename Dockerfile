@@ -39,7 +39,11 @@ WORKDIR $APP_ROOT
 # Copy the code
 COPY src $APP_ROOT/src/
 
-CMD ["fastapi", "run", "--workers", "4", "src/main/app.py"]
+# Copy scripts
+COPY scripts/ $APP_ROOT/scripts/
+
+# Copy tests
+COPY tests/ $APP_ROOT/tests/
 
 FROM python:3.13.0-slim-bullseye as prod
 
@@ -55,4 +59,8 @@ WORKDIR $APP_ROOT
 # Copy the code
 COPY src $APP_ROOT/src/
 
-CMD ["fastapi", "run", "--workers", "4", "src/main/app.py"]
+# Copy startup script
+COPY scripts/ $APP_ROOT/scripts/
+
+# Copy tests
+COPY tests/ $APP_ROOT/tests/
